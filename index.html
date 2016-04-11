@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Cronui : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Cronui</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/snird/CronUI">View on GitHub</a>
+
+          <h1 id="project_title">Cronui</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/snird/CronUI/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/snird/CronUI/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="cron-ui" class="anchor" href="#cron-ui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cron UI</h1>
+
+<p>CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.</p>
+
+<p>CronUI is an adoption of the <img src="https://github.com/shawnchin/jquery-cron/" alt="jquery-cron"> project.</p>
+
+<p>CronUI is completely standalone and has no dependencies.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// Create the ui by initiating new instance of `CronUI`.</span>
+<span class="pl-c">// Pass in the selector for the container element of the form,</span>
+<span class="pl-c">// and an options object.</span>
+recurrentEventForm <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CronUI</span>(<span class="pl-s"><span class="pl-pds">'</span>.container<span class="pl-pds">'</span></span>, {initial<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>* * * * *<span class="pl-pds">'</span></span>});</pre></div>
+
+<h2>
+<a id="functionality" class="anchor" href="#functionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Functionality</h2>
+
+<p>Currently CronUI only supports a subset of cron abilities.</p>
+
+<ul>
+<li>Only support digits</li>
+<li>No commas for multiple entries</li>
+</ul>
+
+<p>These are the possible combinations so far:</p>
+
+<ul>
+<li>Every minute : * * * * *</li>
+<li>Every hour   : ? * * * *</li>
+<li>Every day    : ? ? * * *</li>
+<li>Every week   : ? ? * * ?</li>
+<li>Every month  : ? ? ? * *</li>
+<li>Every year   : ? ? ? ? *</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Cronui maintained by <a href="https://github.com/snird">snird</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>

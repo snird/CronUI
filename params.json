@@ -1,0 +1,6 @@
+{
+  "name": "Cronui",
+  "tagline": "",
+  "body": "# Cron UI\r\nCronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.\r\n\r\nCronUI is an adoption of the ![jquery-cron](https://github.com/shawnchin/jquery-cron/) project.\r\n\r\nCronUI is completely standalone and has no dependencies.\r\n\r\n## Usage\r\n```javascript\r\n// Create the ui by initiating new instance of `CronUI`.\r\n// Pass in the selector for the container element of the form,\r\n// and an options object.\r\nrecurrentEventForm = new CronUI('.container', {initial: '* * * * *'});\r\n```\r\n\r\n## Functionality\r\nCurrently CronUI only supports a subset of cron abilities.\r\n- Only support digits\r\n- No commas for multiple entries\r\n\r\nThese are the possible combinations so far:\r\n- Every minute : * * * * *\r\n- Every hour   : ? * * * *\r\n- Every day    : ? ? * * *\r\n- Every week   : ? ? * * ?\r\n- Every month  : ? ? ? * *\r\n- Every year   : ? ? ? ? *",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
