@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CronUI tests</title>
+
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.23.0.css">
+    <script src="qunit.js"></script>
+    <script src="../lib/cron-ui.js"></script>
+
+</head>
+<body>
+
+<div id="qunit"></div>
+<div id="cron-playground"></div>
+
+
+<script>
+    // Global variables to be used by tests
+    var playground = document.getElementById('cron-playground');
+
+    QUnit.testStart(function(details) {
+        // Reset the playground
+        playground.innerHTML = '';
+    });
+
+    QUnit.module('initialization');
+    QUnit.test('when initialized with every-minute setting, show it correctly', function (assert) {
+        var cron_ui = new CronUI('#cron-playground', {initial: '* * * * *'});
+
+        var cron_period_el = playground.querySelector('.cron-period');
+        // There should be no special settings to display of `cron-period`. it should be shown.
+        assert.equal(cron_period_el.style.display, '');
+        // The selected value should be `minute`
+        var cron_period_select_value = cron_period_el.querySelector('select').options[cron_period_el.querySelector('select').selectedIndex].value;
+        assert.equal(cron_period_select_value, 'minute');
+
+        // Nothing else should show
+        for (var block in cron_ui.blocks) {
+            assert.equal(cron_ui.blocks[block].style.display, 'none', 'block ' + block + ' is properly hidden');
+        }
+    });
+
+    QUnit.test('when initialized with every hour at minute 20 setting, show it correctly', function (assert) {
+        var cron_ui = new CronUI('#cron-playground', {initial: '20 * * * *'});
+
+        var cron_period_el = playground.querySelector('.cron-period');
+        // There should be no special settings to display of `cron-period`. it should be shown.
+        assert.equal(cron_period_el.style.display, '');
+        // The selected value should be `hour`
+        var cron_period_select_value = cron_period_el.querySelector('select').options[cron_period_el.querySelector('select').selectedIndex].value;
+        assert.equal(cron_period_select_value, 'hour');
+
+        // Only the `mins` block should be displayed
+        for (var block in cron_ui.blocks) {
+            if (block === 'mins') {
+                assert.equal(cron_ui.blocks[block].style.display, '', 'block ' + block + ' is displayed properly');
+            } else {
+                assert.equal(cron_ui.blocks[block].style.display, 'none', 'block ' + block + ' is properly hidden');
+            }
+        }
+    });
+
+    QUnit.test('when initialized with every day at 18:20 setting, show it correctly', function (assert) {
+        var cron_ui = new CronUI('#cron-playground', {initial: '20 18 * * *'});
+
+        var cron_period_el = playground.querySelector('.cron-period');
+        // There should be no special settings to display of `cron-period`. it should be shown.
+        assert.equal(cron_period_el.style.display, '');
+        // The selected value should be `day`
+        var cron_period_select_value = cron_period_el.querySelector('select').options[cron_period_el.querySelector('select').selectedIndex].value;
+        assert.equal(cron_period_select_value, 'day');
+
+        // Only the time block should be displayed
+        for (var block in cron_ui.blocks) {
+            if (block === 'time') {
+                assert.equal(cron_ui.blocks[block].style.display, '', 'block ' + block + ' is displayed properly');
+            } else {
+                assert.equal(cron_ui.blocks[block].style.display, 'none', 'block ' + block + ' is properly hidden');
+            }
+        }
+    });
+
+    QUnit.module('getCronType');
+    QUnit.test('returns undefined for invalid cron strings', function (assert) {
+        assert.equal(CronUI.getCronType('* * * *'), undefined);
+        assert.equal(CronUI.getCronType(10), undefined);
+        assert.equal(CronUI.getCronType(true), undefined);
+        assert.equal(CronUI.getCronType('1000 3 * * *'), undefined);
+    });
+    QUnit.test("recognize minute type", function (assert) {
+        var cronString = '* * * * *';
+        assert.equal(CronUI.getCronType(cronString), 'minute');
+    });
+    QUnit.test("recognize hour type", function (assert) {
+        var cronString = '5 * * * *'; // Every hour at `5` minutes to the hour
+        assert.equal(CronUI.getCronType(cronString), 'hour');
+        cronString = '27 * * * *'; // Every hour at `27` minutes to the hour
+        assert.equal(CronUI.getCronType(cronString), 'hour');
+        cronString = '70 * * * *'; // Every hour at `70` minutes to the hour. This will return 'undefined'
+        assert.equal(CronUI.getCronType(cronString), undefined);
+    });
+    QUnit.test("recognize day type", function (assert) {
+        var cronString = '25 18 * * *'; // Every day at 18:25
+        assert.equal(CronUI.getCronType(cronString), 'day');
+        cronString = '0 0 * * *'; // Every day at 00:00
+        assert.equal(CronUI.getCronType(cronString), 'day');
+        cronString = '20 26 * * *'; // Every day at 26:20, this should return 'undefined'
+        assert.equal(CronUI.getCronType(cronString), undefined);
+    });
+    QUnit.test("recognize week type", function (assert) {
+        var cronString = '25 18 * * 3'; // Every Wednesday at 18:25
+        assert.equal(CronUI.getCronType(cronString), 'week');
+        cronString = '0 0 * * 1'; // Every Monday at 00:00
+        assert.equal(CronUI.getCronType(cronString), 'week');
+        cronString = '00 17 * * 7'; // Every Eighth day, at 17:00, this should return 'undefined'
+        assert.equal(CronUI.getCronType(cronString), undefined);
+    });
+    QUnit.test("recognize month type", function (assert) {
+        var cronString = '29 5 8 * *'; // Every Month, on the 8th at 05:29
+        assert.equal(CronUI.getCronType(cronString), 'month');
+        cronString = '22 13 14 * *'; // Every Month, on the 14th at 13:22
+        assert.equal(CronUI.getCronType(cronString), 'month');
+        cronString = '22 13 32 * *'; // Every Month, on the 32th at 13:22, this should return 'undefined'
+        assert.equal(CronUI.getCronType(cronString), undefined);
+    });
+</script>
+
+</body>
+</html>
