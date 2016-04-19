@@ -1,16 +1,19 @@
 # Cron UI
 CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.
 
-CronUI is an adoption of the ![jquery-cron](https://github.com/shawnchin/jquery-cron/) project.
+CronUI is an adaption of the ![jquery-cron](https://github.com/shawnchin/jquery-cron/) project.
 
 CronUI is completely standalone and has no dependencies.
 
 ## Usage
 ```javascript
 // Create the ui by initiating new instance of `CronUI`.
-// Pass in the selector for the container element of the form,
-// and an options object.
+// Pass in an element selector or DOM element by itself to render
+// the form in, and options object.
 recurrentEventForm = new CronUI('.container', {initial: '* * * * *'});
+// With DOM element
+var el = document.querySelector('.my-container');
+new CronUI(el, {initial: '0 5 * * *'});
 ```
 
 ## Functionality
