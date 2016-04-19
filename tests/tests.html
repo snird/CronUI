@@ -92,6 +92,34 @@
             }
         }
     });
+    
+    QUnit.module('Change event');
+    QUnit.test('updates the currentValue on change', function (assert) {
+        var cron_ui = new CronUI('#cron-playground', {initial: '* * * * *'});
+        // make sure the initial value is as expected
+        assert.equal(cron_ui.currentValue, '* * * * *');
+        // change the time period to week
+        playground.querySelector('.cron-period select').value = 'week';
+        // trigger the change events manually
+        playground.querySelector('.cron-period select').dispatchEvent(new Event('change'));
+        
+        // Now the current value should match for `every week`
+        assert.equal(cron_ui.currentValue, '0 0 * * 0');
+    });
+    QUnit.test('calls user given changeEvent callback', function (assert) {
+        var done = assert.async();
+        var changeEventFn = function() {
+            assert.equal(0,0);
+            done();
+        }
+        
+        var cron_ui = new CronUI('#cron-playground', {initial: '* * * * *', changeEvent: changeEventFn});
+        // change the time period to week
+        playground.querySelector('.cron-period select').value = 'week';
+        // trigger the change events manually
+        playground.querySelector('.cron-period select').dispatchEvent(new Event('change'));
+    });
+    
 
     QUnit.module('getCronType');
     QUnit.test('returns undefined for invalid cron strings', function (assert) {
