@@ -25,6 +25,18 @@
     });
 
     QUnit.module('initialization');
+    QUnit.test('render into given selector string', function (assert) {
+        var cron_ui = new CronUI('#cron-playground');
+        // The selector innerHTML should not be empty
+        assert.notEqual(playground.innerHTML, '');
+    });
+    
+    QUnit.test('render into given DOM element', function (assert) {
+        var cron_ui = new CronUI(playground);
+        // The selector innerHTML should not be empty
+        assert.notEqual(playground.innerHTML, '');
+    });
+    
     QUnit.test('when initialized with every-minute setting, show it correctly', function (assert) {
         var cron_ui = new CronUI('#cron-playground', {initial: '* * * * *'});
 
