@@ -1,11 +1,11 @@
 # Cron UI
 CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.
 
-CronUI is an adaption of the !(jquery-cron)[https://github.com/shawnchin/jquery-cron/] project.
+CronUI is an adaption of the [jquery-cron](https://github.com/shawnchin/jquery-cron/) project.
 
 CronUI is completely standalone and has no dependencies.
 
-Visit the !(CronUI page)[https://snird.github.io/CronUI/] for docs and examples.
+Visit the [CronUI page](https://snird.github.io/CronUI/) for docs and examples.
 
 ## Usage
 ```javascript
