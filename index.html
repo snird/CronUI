@@ -4,11 +4,16 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Cronui : ">
+    <meta name="description" content="CronUI">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <script src="./javascripts/cron-ui.js"></script>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/github.css">
+    <script src="./javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
-    <title>Cronui</title>
+    <title>CronUI</title>
   </head>
 
   <body>
@@ -18,7 +23,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/snird/CronUI">View on GitHub</a>
 
-          <h1 id="project_title">Cronui</h1>
+          <h1 id="project_title">CronUI</h1>
           <h2 id="project_tagline"></h2>
 
             <section id="downloads">
@@ -32,42 +37,81 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a id="cron-ui" class="anchor" href="#cron-ui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cron UI</h1>
+        <a id="cron-ui" class="anchor" href="#cron-ui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cron UI</h1>
 
-<p>CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.</p>
+        <p>CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.</p>
 
-<p>CronUI is an adoption of the <img src="https://github.com/shawnchin/jquery-cron/" alt="jquery-cron"> project.</p>
+        <p>CronUI is an adaption of the <a href="https://github.com/shawnchin/jquery-cron/">jquery-cron</a> project.</p>
 
-<p>CronUI is completely standalone and has no dependencies.</p>
+        <p>CronUI is completely standalone and has no dependencies.</p>
 
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+        <h2>
+        <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+        
+        <pre>
+          <code class='javascript'>
+// Create the ui by initiating new instance of `CronUI`.
+// Pass in an element selector or DOM element by itself to render
+// the form in, and options object.
+recurrentEventForm = new CronUI('.container', {initial: '* * * * *'});
+// With DOM element
+var el = document.querySelector('.my-container');
+new CronUI(el, {initial: '0 5 * * *'});
+          </code>
+        </pre>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-c">// Create the ui by initiating new instance of `CronUI`.</span>
-<span class="pl-c">// Pass in the selector for the container element of the form,</span>
-<span class="pl-c">// and an options object.</span>
-recurrentEventForm <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CronUI</span>(<span class="pl-s"><span class="pl-pds">'</span>.container<span class="pl-pds">'</span></span>, {initial<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>* * * * *<span class="pl-pds">'</span></span>});</pre></div>
+        <h2>
+        <a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
+        
+        Every <span id="cronui-example"></span>
+        <div id="cronui-example-exported-string">Once changed, the new cron string will be here.</div>
+        
+        <script>
+          var example = new CronUI('#cronui-example', {
+            initial: '15 12 * * *',
+            changeEvent: function(cronString) {
+              document.querySelector('#cronui-example-exported-string').innerHTML = cronString;
+            }
+          });
+        </script>
+        
+        <pre>
+          <code class='html'>
+Every &lt;span id=&quot;cronui-example&quot;&gt;&lt;/span&gt;
+&lt;div id=&quot;cronui-example-exported-string&quot;&gt;Once changed, the new cron string will be here.&lt;/div&gt;
 
-<h2>
-<a id="functionality" class="anchor" href="#functionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Functionality</h2>
+&lt;script&gt;
+  var example = new CronUI('#cronui-example', {
+    initial: '15 12 * * *',
+    changeEvent: function(cronString) {
+      document.querySelector('#cronui-example-exported-string').innerHTML = cronString;
+    }
+  });
+&lt;/script&gt;
+          </code>
+        </pre>
+        
 
-<p>Currently CronUI only supports a subset of cron abilities.</p>
+        <h2>
+        <a id="functionality" class="anchor" href="#functionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Functionality</h2>
 
-<ul>
-<li>Only support digits</li>
-<li>No commas for multiple entries</li>
-</ul>
+        <p>Currently CronUI only supports a subset of cron abilities.</p>
 
-<p>These are the possible combinations so far:</p>
+        <ul>
+        <li>Only support digits</li>
+        <li>No commas for multiple entries</li>
+        </ul>
 
-<ul>
-<li>Every minute : * * * * *</li>
-<li>Every hour   : ? * * * *</li>
-<li>Every day    : ? ? * * *</li>
-<li>Every week   : ? ? * * ?</li>
-<li>Every month  : ? ? ? * *</li>
-<li>Every year   : ? ? ? ? *</li>
-</ul>
+        <p>These are the possible combinations so far:</p>
+
+        <ul>
+        <li>Every minute : * * * * *</li>
+        <li>Every hour   : ? * * * *</li>
+        <li>Every day    : ? ? * * *</li>
+        <li>Every week   : ? ? * * ?</li>
+        <li>Every month  : ? ? ? * *</li>
+        <li>Every year   : ? ? ? ? *</li>
+        </ul>
       </section>
     </div>
 
