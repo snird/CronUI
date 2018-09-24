@@ -1,0 +1,30 @@
+{
+  "name": "cron-ui",
+  "version": "1.0.2",
+  "description": "CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.",
+  "main": "./lib/cron-io.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikeymckay/CronUI.git"
+  },
+  "keywords": [
+    "cron",
+    "gui",
+    "scheduler",
+    "crontab",
+    "build"
+  ],
+  "author": "@shawnchin @snird @mikeymckay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikeymckay/CronUI/issues"
+  },
+  "homepage": "https://github.com/mikeymckay/CronUI#readme"
+}

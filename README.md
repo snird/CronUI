@@ -1,3 +1,5 @@
+(just a repackaging so that it will work with npm)
+
 # Cron UI
 CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.
 
