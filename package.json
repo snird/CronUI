@@ -2,7 +2,7 @@
   "name": "cron-ui",
   "version": "1.0.2",
   "description": "CronUI provides a simple easy-to-use form for users to specify recurrent events, translated to cron strings.",
-  "main": "./lib/cron-io.js",
+  "main": "./lib/cron-ui.js",
   "directories": {
     "lib": "lib",
     "test": "tests"
